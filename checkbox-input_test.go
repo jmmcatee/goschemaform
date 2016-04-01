@@ -1,0 +1,18 @@
+package goschemaform
+
+import (
+	"testing"
+)
+
+func TestCheckBoxDefaults(t *testing.T) {
+	check := NewCheckBoxInput("checkbox1")
+
+	t.Logf("Form:\n%s\n\nSchema:\n%s\n", check.Form(), check.Schema())
+}
+
+func TestCheckBoxTitle(t *testing.T) {
+	check := NewCheckBoxInput("checkbox1")
+	check.SetTitle("Checkbox 1")
+
+	t.Logf("Form:\n%s\n\nSchema:\n%s\n", check.Form(), check.Schema())
+}
