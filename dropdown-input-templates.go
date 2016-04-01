@@ -12,8 +12,7 @@ const tmplDropDownForm = `
             "group": "{{$element.Group}}"{{end}}
         }{{end}}
     ]{{end}}
-}
-`
+}`
 
 const tmplDropDownSchema = `
         "{{.Key}}": {
@@ -23,5 +22,4 @@ const tmplDropDownSchema = `
                 {{range $index, $element := .Enum}}{{if $index}},
                 {{end}}"{{$element.Value}}"{{end}}
             ]
-        }
-`
+        }`
