@@ -12,7 +12,7 @@ const tmplDropDownForm = `
             "group": "{{$element.Group}}"{{end}}
         }{{end}}
     ]{{end}}{{if .ConditionCheck}},
-    "condition": "model.{{.Condition}}"{{end}}
+    "condition": "{{if .ConditionFlip}}!{{end}}model.{{.Condition}}"{{end}}
 }`
 
 const tmplDropDownSchema = `

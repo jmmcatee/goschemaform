@@ -11,13 +11,14 @@ import (
 // field set.
 func NewTextInput(key string) *TextInput {
 	return &TextInput{
-		key:         key,
-		multiline:   false,
-		title:       "",
-		placeHolder: "",
-		maxLength:   0,
-		required:    false,
-		condition:   "",
+		key:           key,
+		multiline:     false,
+		title:         "",
+		placeHolder:   "",
+		maxLength:     0,
+		required:      false,
+		condition:     "",
+		conditionFlip: false,
 	}
 }
 
@@ -25,13 +26,14 @@ func NewTextInput(key string) *TextInput {
 // default TextInput structure is a single line input. You can use SetMultiline
 // to change the input to a multiple line text input field (textarea).
 type TextInput struct {
-	key         string
-	multiline   bool
-	title       string
-	placeHolder string
-	maxLength   int
-	required    bool
-	condition   string
+	key           string
+	multiline     bool
+	title         string
+	placeHolder   string
+	maxLength     int
+	required      bool
+	condition     string
+	conditionFlip bool
 }
 
 // Form retuns the "form" section of the JSON Schema Form definition
@@ -50,12 +52,14 @@ func (t *TextInput) Form() string {
 		PlaceHolder    string
 		ConditionCheck bool
 		Condition      string
+		ConditionFlip  bool
 	}{
 		t.key,
 		t.getType(),
 		t.placeHolder,
 		cCheck,
 		t.condition,
+		t.conditionFlip,
 	}
 
 	form := bytes.NewBuffer([]byte{})
@@ -168,7 +172,10 @@ func (t *TextInput) IsRequired(req bool) {
 }
 
 // SetConidition will set whether this item displays on the form based on if the provided
-// key has a value or not.
-func (t *TextInput) SetConidition(text string) {
+// key has a value or not. You can reverse the behaivor with the defaultHide switch. False
+// for this option is the default and will make something only appear if the condition is
+// is set, while true flips this and shows the control until the condition is met.
+func (t *TextInput) SetConidition(text string, defaultHide bool) {
 	t.condition = text
+	t.conditionFlip = defaultHide
 }

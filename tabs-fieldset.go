@@ -12,6 +12,7 @@ func NewTabFieldset() *TabFieldset {
 		title:     "",
 		elem:      []Tab{},
 		condition: "",
+		condFlip:  false,
 	}
 }
 
@@ -20,6 +21,7 @@ type TabFieldset struct {
 	title     string
 	elem      []Tab
 	condition string
+	condFlip  bool
 }
 
 // Form returns the "form" section of the JSON Schema Form definition
@@ -37,11 +39,13 @@ func (f *TabFieldset) Form() string {
 		Elem           []element
 		ConditionCheck bool
 		Condition      string
+		ConditionFlip  bool
 	}{
 		Title:          f.title,
 		Elem:           []element{},
 		ConditionCheck: cCheck,
 		Condition:      f.condition,
+		ConditionFlip:  f.condFlip,
 	}
 
 	for i := range f.elem {
@@ -111,9 +115,12 @@ func (f *TabFieldset) SetTitle(title string) {
 }
 
 // SetConidition will set whether this item displays on the form based on if the provided
-// key has a value or not.
-func (f *TabFieldset) SetConidition(text string) {
+// key has a value or not. You can reverse the behaivor with the defaultHide switch. False
+// for this option is the default and will make something only appear if the condition is
+// is set, while true flips this and shows the control until the condition is met.
+func (f *TabFieldset) SetConidition(text string, defaultHide bool) {
 	f.condition = text
+	f.condFlip = defaultHide
 }
 
 // AddTab adds a tab to the fieldset

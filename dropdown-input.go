@@ -15,6 +15,7 @@ func NewDropDownInput(key string) *DropDownInput {
 		required:  false,
 		enum:      []DropDownInputOption{},
 		condition: "",
+		condFlip:  false,
 	}
 }
 
@@ -25,6 +26,7 @@ type DropDownInput struct {
 	required  bool
 	enum      []DropDownInputOption
 	condition string
+	condFlip  bool
 }
 
 // options is a structure used in processing the templates
@@ -49,11 +51,13 @@ func (d *DropDownInput) Form() string {
 		Enum           []options
 		ConditionCheck bool
 		Condition      string
+		ConditionFlip  bool
 	}{}
 
 	tmplData.Key = d.key
 	tmplData.ConditionCheck = cCheck
 	tmplData.Condition = d.condition
+	tmplData.ConditionFlip = d.condFlip
 	for i := range d.enum {
 		o := options{
 			Value: d.enum[i].value,
@@ -170,9 +174,12 @@ func (d *DropDownInput) AddOption(option *DropDownInputOption) {
 }
 
 // SetConidition will set whether this item displays on the form based on if the provided
-// key has a value or not.
-func (d *DropDownInput) SetConidition(text string) {
+// key has a value or not. You can reverse the behaivor with the defaultHide switch. False
+// for this option is the default and will make something only appear if the condition is
+// is set, while true flips this and shows the control until the condition is met.
+func (d *DropDownInput) SetConidition(text string, defaultHide bool) {
 	d.condition = text
+	d.condFlip = defaultHide
 }
 
 // NewDropDownInputOption returns an initialized DropDownInputOption

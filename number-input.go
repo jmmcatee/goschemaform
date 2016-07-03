@@ -19,6 +19,7 @@ func NewNumberInput(key string) *NumberInput {
 		maxSet:    false,
 		required:  false,
 		condition: "",
+		condFlip:  false,
 	}
 }
 
@@ -32,6 +33,7 @@ type NumberInput struct {
 	maxSet    bool
 	required  bool
 	condition string
+	condFlip  bool
 }
 
 // Form retuns the "form" section of the JSON Schema Form definition
@@ -48,10 +50,12 @@ func (n *NumberInput) Form() string {
 		Key            string
 		ConditionCheck bool
 		Condition      string
+		ConditionFlip  bool
 	}{
 		Key:            n.key,
 		ConditionCheck: cCheck,
 		Condition:      n.condition,
+		ConditionFlip:  n.condFlip,
 	}
 
 	form := bytes.NewBuffer([]byte{})
@@ -150,7 +154,10 @@ func (n *NumberInput) IsRequired(req bool) {
 }
 
 // SetConidition will set whether this item displays on the form based on if the provided
-// key has a value or not.
-func (n *NumberInput) SetConidition(text string) {
+// key has a value or not. You can reverse the behaivor with the defaultHide switch. False
+// for this option is the default and will make something only appear if the condition is
+// is set, while true flips this and shows the control until the condition is met.
+func (n *NumberInput) SetConidition(text string, defaultHide bool) {
 	n.condition = text
+	n.condFlip = defaultHide
 }

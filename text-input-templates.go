@@ -5,7 +5,7 @@ const tmplTextInputForm = `
     "key": "{{.Key}}",
     "type": "{{.Type}}",
     "placeholder": "{{.PlaceHolder}}"{{if .ConditionCheck}},
-    "condition": "model.{{.Condition}}"{{end}}
+    "condition": "{{if .ConditionFlip}}!{{end}}model.{{.Condition}}"{{end}}
 }
 `
 

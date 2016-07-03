@@ -17,6 +17,7 @@ func NewFileInput(key string) *FileInput {
 		maxSize:     0,
 		required:    false,
 		condition:   "",
+		condFlip:    false,
 	}
 }
 
@@ -30,6 +31,7 @@ type FileInput struct {
 	maxSize     int
 	required    bool
 	condition   string
+	condFlip    bool
 }
 
 // Form retuns the "form" section of the JSON Schema Form definition
@@ -47,11 +49,13 @@ func (t *FileInput) Form() string {
 		PlaceHolder    string
 		ConditionCheck bool
 		Condition      string
+		ConditionFlip  bool
 	}{
 		t.key,
 		t.placeHolder,
 		cCheck,
 		t.condition,
+		t.condFlip,
 	}
 
 	form := bytes.NewBuffer([]byte{})
@@ -150,7 +154,10 @@ func (t *FileInput) IsRequired(req bool) {
 }
 
 // SetConidition will set whether this item displays on the form based on if the provided
-// key has a value or not.
-func (t *FileInput) SetConidition(text string) {
+// key has a value or not. You can reverse the behaivor with the defaultHide switch. False
+// for this option is the default and will make something only appear if the condition is
+// is set, while true flips this and shows the control until the condition is met.
+func (t *FileInput) SetConidition(text string, defaultHide bool) {
 	t.condition = text
+	t.condFlip = defaultHide
 }

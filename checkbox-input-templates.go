@@ -4,7 +4,7 @@ const tmplCheckBoxForm = `
 {
     "key": "{{.Key}}",
     "type": "checkbox"{{if .ConditionCheck}},
-    "condition": "model.{{.Condition}}"{{end}}
+    "condition": "{{if .ConditionFlip}}!{{end}}model.{{.Condition}}"{{end}}
 }`
 
 const tmplCheckBoxSchema = `

@@ -14,6 +14,7 @@ func NewCheckBoxInput(key string) *CheckBoxInput {
 		title:     "",
 		required:  false,
 		condition: "",
+		condFlip:  false,
 	}
 }
 
@@ -23,6 +24,7 @@ type CheckBoxInput struct {
 	title     string
 	required  bool
 	condition string
+	condFlip  bool
 }
 
 // Form returns the "form" section of the JSON Schema Form definition
@@ -40,11 +42,13 @@ func (c *CheckBoxInput) Form() string {
 		Title          string
 		ConditionCheck bool
 		Condition      string
+		ConditionFlip  bool
 	}{
 		Key:            c.key,
 		Title:          c.title,
 		ConditionCheck: cCheck,
 		Condition:      c.condition,
+		ConditionFlip:  c.condFlip,
 	}
 
 	form := bytes.NewBuffer([]byte{})
@@ -121,7 +125,10 @@ func (c *CheckBoxInput) IsRequired(req bool) {
 }
 
 // SetConidition will set whether this item displays on the form based on if the provided
-// key has a value or not.
-func (c *CheckBoxInput) SetConidition(text string) {
+// key has a value or not. You can reverse the behaivor with the defaultHide switch. False
+// for this option is the default and will make something only appear if the condition is
+// is set, while true flips this and shows the control until the condition is met.
+func (c *CheckBoxInput) SetConidition(text string, defaultHide bool) {
 	c.condition = text
+	c.condFlip = defaultHide
 }

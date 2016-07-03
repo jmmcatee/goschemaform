@@ -46,7 +46,18 @@ func TestNumberInputMinMaxCondition(t *testing.T) {
 	input.SetTitle("Test 1")
 	input.SetMin(-10)
 	input.SetMax(5)
-	input.SetConidition("check2")
+	input.SetConidition("check2", false)
+
+	t.Logf("Form:\n%s\n\nSchema:\n%s\n", input.Form(), input.Schema())
+}
+
+func TestNumberInputMinMaxConditionFlip(t *testing.T) {
+	input := NewNumberInput("test1")
+
+	input.SetTitle("Test 1")
+	input.SetMin(-10)
+	input.SetMax(5)
+	input.SetConidition("check2", true)
 
 	t.Logf("Form:\n%s\n\nSchema:\n%s\n", input.Form(), input.Schema())
 }

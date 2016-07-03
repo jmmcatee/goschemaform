@@ -4,7 +4,7 @@ const tmplNumberInputForm = `
 {
     "key": "{{.Key}}",
     "type": "number"{{if .ConditionCheck}},
-    "condition": "model.{{.Condition}}"{{end}}
+    "condition": "{{if .ConditionFlip}}!{{end}}model.{{.Condition}}"{{end}}
 }
 `
 

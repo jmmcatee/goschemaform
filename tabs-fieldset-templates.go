@@ -16,7 +16,7 @@ const tmplTabFieldsetForm = `
             "tabs": [{{range $index, $element := .Elem}}{{if $index}},{{end}}{{$element.Form}}{{end}}]
         }
     ]{{if .ConditionCheck}},
-    "condition": "model.{{.Condition}}"{{end}}
+    "condition": "{{if .ConditionFlip}}!{{end}}model.{{.Condition}}"{{end}}
 }
 `
 
