@@ -11,25 +11,27 @@ import (
 // field sen.
 func NewNumberInput(key string) *NumberInput {
 	return &NumberInput{
-		key:      key,
-		title:    "",
-		min:      0,
-		minSet:   false,
-		max:      0,
-		maxSet:   false,
-		required: false,
+		key:       key,
+		title:     "",
+		min:       0,
+		minSet:    false,
+		max:       0,
+		maxSet:    false,
+		required:  false,
+		condition: "",
 	}
 }
 
 // NumberInput is a structure for a number input field.
 type NumberInput struct {
-	key      string
-	title    string
-	min      int
-	minSet   bool
-	max      int
-	maxSet   bool
-	required bool
+	key       string
+	title     string
+	min       int
+	minSet    bool
+	max       int
+	maxSet    bool
+	required  bool
+	condition string
 }
 
 // Form retuns the "form" section of the JSON Schema Form definition
@@ -37,10 +39,19 @@ func (n *NumberInput) Form() string {
 	// Compile the template for generating the Form section
 	var tmplForm = template.Must(template.New("form").Parse(tmplNumberInputForm))
 
+	var cCheck = false
+	if n.condition != "" {
+		cCheck = true
+	}
+
 	tmplData := struct {
-		Key string
+		Key            string
+		ConditionCheck bool
+		Condition      string
 	}{
-		Key: n.key,
+		Key:            n.key,
+		ConditionCheck: cCheck,
+		Condition:      n.condition,
 	}
 
 	form := bytes.NewBuffer([]byte{})
@@ -136,4 +147,10 @@ func (n *NumberInput) SetMin(min int) {
 // (false).
 func (n *NumberInput) IsRequired(req bool) {
 	n.required = req
+}
+
+// SetConidition will set whether this item displays on the form based on if the provided
+// key has a value or not.
+func (n *NumberInput) SetConidition(text string) {
+	n.condition = text
 }

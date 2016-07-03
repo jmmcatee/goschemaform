@@ -3,7 +3,8 @@ package goschemaform
 const tmplNumberInputForm = `
 {
     "key": "{{.Key}}",
-    "type": "number"
+    "type": "number"{{if .ConditionCheck}},
+    "condition": "model.{{.Condition}}"{{end}}
 }
 `
 

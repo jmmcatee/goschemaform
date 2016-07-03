@@ -11,7 +11,8 @@ const tmplDropDownForm = `
             "name": {{if $element.Name}}"{{$element.Name}}"{{else}}"{{$element.Value}}"{{end}}{{if $element.Group}},
             "group": "{{$element.Group}}"{{end}}
         }{{end}}
-    ]{{end}}
+    ]{{end}}{{if .ConditionCheck}},
+    "condition": "model.{{.Condition}}"{{end}}
 }`
 
 const tmplDropDownSchema = `

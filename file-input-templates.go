@@ -1,18 +1,18 @@
 package goschemaform
 
-const tmplTextInputForm = `
+const tmplFileInputForm = `
 {
     "key": "{{.Key}}",
-    "type": "{{.Type}}",
     "placeholder": "{{.PlaceHolder}}"{{if .ConditionCheck}},
     "condition": "model.{{.Condition}}"{{end}}
 }
 `
 
-const tmplTextInputSchema = `
+const tmplFileInputSchema = `
 "{{.Key}}": {
     "title": "{{.Title}}",
-    "type": "string"{{if .MaxLength}},
-    "maxLength": "{{.MaxLengthString}}"{{end}}
+    "type": "string",
+    "format": "base64"{{if .MaxSize}},
+    "maxSize": "{{.MaxSizeString}}"{{end}}
 }
 `

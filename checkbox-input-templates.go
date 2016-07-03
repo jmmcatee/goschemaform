@@ -3,7 +3,8 @@ package goschemaform
 const tmplCheckBoxForm = `
 {
     "key": "{{.Key}}",
-    "type": "checkbox"
+    "type": "checkbox"{{if .ConditionCheck}},
+    "condition": "model.{{.Condition}}"{{end}}
 }`
 
 const tmplCheckBoxSchema = `

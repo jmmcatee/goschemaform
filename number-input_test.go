@@ -39,3 +39,14 @@ func TestNumberInputMinMax(t *testing.T) {
 
 	t.Logf("Form:\n%s\n\nSchema:\n%s\n", input.Form(), input.Schema())
 }
+
+func TestNumberInputMinMaxCondition(t *testing.T) {
+	input := NewNumberInput("test1")
+
+	input.SetTitle("Test 1")
+	input.SetMin(-10)
+	input.SetMax(5)
+	input.SetConidition("check2")
+
+	t.Logf("Form:\n%s\n\nSchema:\n%s\n", input.Form(), input.Schema())
+}

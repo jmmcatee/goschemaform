@@ -10,17 +10,19 @@ import (
 // NewCheckBoxInput returns an initialized CheckBoxInput
 func NewCheckBoxInput(key string) *CheckBoxInput {
 	return &CheckBoxInput{
-		key:      key,
-		title:    "",
-		required: false,
+		key:       key,
+		title:     "",
+		required:  false,
+		condition: "",
 	}
 }
 
 // CheckBoxInput represents a form checkxbox
 type CheckBoxInput struct {
-	key      string
-	title    string
-	required bool
+	key       string
+	title     string
+	required  bool
+	condition string
 }
 
 // Form returns the "form" section of the JSON Schema Form definition
@@ -28,12 +30,21 @@ func (c *CheckBoxInput) Form() string {
 	// Compile the template for generating the form section
 	var tmplForm = template.Must(template.New("form").Parse(tmplCheckBoxForm))
 
+	var cCheck = false
+	if c.condition != "" {
+		cCheck = true
+	}
+
 	tmplData := struct {
-		Key   string
-		Title string
+		Key            string
+		Title          string
+		ConditionCheck bool
+		Condition      string
 	}{
-		Key:   c.key,
-		Title: c.title,
+		Key:            c.key,
+		Title:          c.title,
+		ConditionCheck: cCheck,
+		Condition:      c.condition,
 	}
 
 	form := bytes.NewBuffer([]byte{})
@@ -107,4 +118,10 @@ func (c *CheckBoxInput) SetTitle(title string) {
 // (false).
 func (c *CheckBoxInput) IsRequired(req bool) {
 	c.required = req
+}
+
+// SetConidition will set whether this item displays on the form based on if the provided
+// key has a value or not.
+func (c *CheckBoxInput) SetConidition(text string) {
+	c.condition = text
 }

@@ -4,44 +4,35 @@ import (
 	"testing"
 )
 
-func TestTextInputDefaults(t *testing.T) {
-	input := NewTextInput("test1")
+func TestFileInputDefaults(t *testing.T) {
+	input := NewFileInput("test1")
 
 	input.SetTitle("Test 1")
 
 	t.Logf("Form:\n%s\n\nSchema:\n%s\n", input.Form(), input.Schema())
 }
 
-func TestTextInputPlaceHolder(t *testing.T) {
-	input := NewTextInput("test1")
-
-	input.SetTitle("Test 1")
-	input.SetPlaceHolder("Please type here...")
-
-	t.Logf("Form:\n%s\n\nSchema:\n%s\n", input.Form(), input.Schema())
-}
-
-func TestTextInputMaxLength(t *testing.T) {
-	input := NewTextInput("test1")
+func TestFileInputPlaceHolder(t *testing.T) {
+	input := NewFileInput("test1")
 
 	input.SetTitle("Test 1")
 	input.SetPlaceHolder("Please type here...")
-	input.SetMaxLength(10)
 
 	t.Logf("Form:\n%s\n\nSchema:\n%s\n", input.Form(), input.Schema())
 }
 
-func TestTextInputMultiline(t *testing.T) {
-	input := NewTextInput("test1")
+func TestFileInputMaxSize(t *testing.T) {
+	input := NewFileInput("test1")
 
 	input.SetTitle("Test 1")
-	input.SetMultiline(true)
+	input.SetPlaceHolder("Please type here...")
+	input.SetMaxSize(10)
 
 	t.Logf("Form:\n%s\n\nSchema:\n%s\n", input.Form(), input.Schema())
 }
 
-func TestTextInputConditional(t *testing.T) {
-	input := NewTextInput("test1")
+func TestFileInputConditional(t *testing.T) {
+	input := NewFileInput("test1")
 
 	input.SetTitle("Test 1")
 	input.SetConidition("check1")

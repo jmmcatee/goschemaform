@@ -10,19 +10,21 @@ import (
 // NewDropDownInput returns an initialized DropDownInput
 func NewDropDownInput(key string) *DropDownInput {
 	return &DropDownInput{
-		key:      key,
-		title:    "",
-		required: false,
-		enum:     []DropDownInputOption{},
+		key:       key,
+		title:     "",
+		required:  false,
+		enum:      []DropDownInputOption{},
+		condition: "",
 	}
 }
 
 // DropDownInput represents a form dropdown or single select
 type DropDownInput struct {
-	key      string
-	title    string
-	required bool
-	enum     []DropDownInputOption
+	key       string
+	title     string
+	required  bool
+	enum      []DropDownInputOption
+	condition string
 }
 
 // options is a structure used in processing the templates
@@ -37,12 +39,21 @@ func (d *DropDownInput) Form() string {
 	// Compile the template for generating the form section
 	var tmplForm = template.Must(template.New("form").Parse(tmplDropDownForm))
 
+	var cCheck = false
+	if d.condition != "" {
+		cCheck = true
+	}
+
 	tmplData := struct {
-		Key  string
-		Enum []options
+		Key            string
+		Enum           []options
+		ConditionCheck bool
+		Condition      string
 	}{}
 
 	tmplData.Key = d.key
+	tmplData.ConditionCheck = cCheck
+	tmplData.Condition = d.condition
 	for i := range d.enum {
 		o := options{
 			Value: d.enum[i].value,
@@ -156,6 +167,12 @@ func (d *DropDownInput) IsRequired(req bool) {
 // AddOption adds a DropDownInputOption to the DropDownInput
 func (d *DropDownInput) AddOption(option *DropDownInputOption) {
 	d.enum = append(d.enum, *option)
+}
+
+// SetConidition will set whether this item displays on the form based on if the provided
+// key has a value or not.
+func (d *DropDownInput) SetConidition(text string) {
+	d.condition = text
 }
 
 // NewDropDownInputOption returns an initialized DropDownInputOption

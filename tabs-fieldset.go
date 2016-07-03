@@ -9,15 +9,17 @@ import (
 // NewTabFieldset returns an initialized TabFieldset
 func NewTabFieldset() *TabFieldset {
 	return &TabFieldset{
-		title: "",
-		elem:  []Tab{},
+		title:     "",
+		elem:      []Tab{},
+		condition: "",
 	}
 }
 
 // TabFieldset represents the fieldset that holds multiple tabs
 type TabFieldset struct {
-	title string
-	elem  []Tab
+	title     string
+	elem      []Tab
+	condition string
 }
 
 // Form returns the "form" section of the JSON Schema Form definition
@@ -25,12 +27,21 @@ func (f *TabFieldset) Form() string {
 	// Compile the template for generating the form section
 	var tmplForm = template.Must(template.New("form").Parse(tmplTabFieldsetForm))
 
+	var cCheck = false
+	if f.condition != "" {
+		cCheck = true
+	}
+
 	tmplData := struct {
-		Title string
-		Elem  []element
+		Title          string
+		Elem           []element
+		ConditionCheck bool
+		Condition      string
 	}{
-		Title: f.title,
-		Elem:  []element{},
+		Title:          f.title,
+		Elem:           []element{},
+		ConditionCheck: cCheck,
+		Condition:      f.condition,
 	}
 
 	for i := range f.elem {
@@ -97,6 +108,12 @@ func (f *TabFieldset) Inputs() []Input {
 // SetTitle sets the fieldset title
 func (f *TabFieldset) SetTitle(title string) {
 	f.title = title
+}
+
+// SetConidition will set whether this item displays on the form based on if the provided
+// key has a value or not.
+func (f *TabFieldset) SetConidition(text string) {
+	f.condition = text
 }
 
 // AddTab adds a tab to the fieldset
