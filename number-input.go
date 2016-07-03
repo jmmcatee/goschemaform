@@ -153,11 +153,11 @@ func (n *NumberInput) IsRequired(req bool) {
 	n.required = req
 }
 
-// SetConidition will set whether this item displays on the form based on if the provided
+// SetCondition will set whether this item displays on the form based on if the provided
 // key has a value or not. You can reverse the behaivor with the defaultHide switch. False
 // for this option is the default and will make something only appear if the condition is
 // is set, while true flips this and shows the control until the condition is met.
-func (n *NumberInput) SetConidition(text string, defaultHide bool) {
+func (n *NumberInput) SetCondition(text string, defaultHide bool) {
 	n.condition = text
 	n.condFlip = defaultHide
 }

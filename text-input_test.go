@@ -44,7 +44,7 @@ func TestTextInputConditional(t *testing.T) {
 	input := NewTextInput("test1")
 
 	input.SetTitle("Test 1")
-	input.SetConidition("check1", false)
+	input.SetCondition("check1", false)
 
 	t.Logf("Form:\n%s\n\nSchema:\n%s\n", input.Form(), input.Schema())
 }
@@ -53,7 +53,7 @@ func TestTextInputConditionalFlip(t *testing.T) {
 	input := NewTextInput("test1")
 
 	input.SetTitle("Test 1")
-	input.SetConidition("check1", true)
+	input.SetCondition("check1", true)
 
 	t.Logf("Form:\n%s\n\nSchema:\n%s\n", input.Form(), input.Schema())
 }

@@ -114,11 +114,11 @@ func (f *TabFieldset) SetTitle(title string) {
 	f.title = title
 }
 
-// SetConidition will set whether this item displays on the form based on if the provided
+// SetCondition will set whether this item displays on the form based on if the provided
 // key has a value or not. You can reverse the behaivor with the defaultHide switch. False
 // for this option is the default and will make something only appear if the condition is
 // is set, while true flips this and shows the control until the condition is met.
-func (f *TabFieldset) SetConidition(text string, defaultHide bool) {
+func (f *TabFieldset) SetCondition(text string, defaultHide bool) {
 	f.condition = text
 	f.condFlip = defaultHide
 }

@@ -87,7 +87,7 @@ func TestMultiTabMulitInput(t *testing.T) {
 func TestMultiTabMulitInputConditional(t *testing.T) {
 	f := NewTabFieldset()
 	f.SetTitle("Tabbed Form")
-	f.SetConidition("check1", false)
+	f.SetCondition("check1", false)
 	t1 := NewTab()
 	t1.SetTitle("Tab 1")
 	t2 := NewTab()
@@ -139,7 +139,7 @@ func TestMultiTabMulitInputConditional(t *testing.T) {
 func TestMultiTabMulitInputConditionalFlip(t *testing.T) {
 	f := NewTabFieldset()
 	f.SetTitle("Tabbed Form")
-	f.SetConidition("check1", true)
+	f.SetCondition("check1", true)
 	t1 := NewTab()
 	t1.SetTitle("Tab 1")
 	t2 := NewTab()

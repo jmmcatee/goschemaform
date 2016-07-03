@@ -20,7 +20,7 @@ func TestCheckBoxTitle(t *testing.T) {
 func TestCheckBoxTitleCondition(t *testing.T) {
 	check := NewCheckBoxInput("checkbox1")
 	check.SetTitle("Checkbox 1")
-	check.SetConidition("check1", false)
+	check.SetCondition("check1", false)
 
 	t.Logf("Form:\n%s\n\nSchema:\n%s\n", check.Form(), check.Schema())
 }
@@ -28,7 +28,7 @@ func TestCheckBoxTitleCondition(t *testing.T) {
 func TestCheckBoxTitleConditionFlip(t *testing.T) {
 	check := NewCheckBoxInput("checkbox1")
 	check.SetTitle("Checkbox 1")
-	check.SetConidition("check1", true)
+	check.SetCondition("check1", true)
 
 	t.Logf("Form:\n%s\n\nSchema:\n%s\n", check.Form(), check.Schema())
 }

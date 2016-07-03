@@ -68,7 +68,7 @@ func TestDropDownTitleGroups(t *testing.T) {
 
 func TestDropDownTitleGroupsConditional(t *testing.T) {
 	dd := NewDropDownInput("dd1")
-	dd.SetConidition("check1", false)
+	dd.SetCondition("check1", false)
 	o1 := NewDropDownInputOption("value1")
 	o1.SetName("Value One")
 	o1.SetGroup("Group 1")
@@ -87,7 +87,7 @@ func TestDropDownTitleGroupsConditional(t *testing.T) {
 
 func TestDropDownTitleGroupsConditionalFlip(t *testing.T) {
 	dd := NewDropDownInput("dd1")
-	dd.SetConidition("check1", true)
+	dd.SetCondition("check1", true)
 	o1 := NewDropDownInputOption("value1")
 	o1.SetName("Value One")
 	o1.SetGroup("Group 1")
